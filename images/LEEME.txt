@@ -1,0 +1,18 @@
+FOTOS DE LA GALERÍA
+===================
+
+Pon aquí tus fotos con estos nombres exactos:
+
+  foto1.jpg
+  foto2.jpg
+  foto3.jpg
+
+Si un archivo no existe todavía, se muestra automáticamente
+placeholder.svg (la flor morada) en su lugar.
+
+Para AÑADIR más fotos:
+1) Copia tu imagen aquí (por ejemplo foto4.jpg).
+2) Abre index.html y, en la sección "GALERÍA DE FOTOS",
+   copia un bloque <figure>...</figure> y cambia el src y el texto.
+
+Consejo: imágenes horizontales de ~1200px de ancho se ven muy bien.
