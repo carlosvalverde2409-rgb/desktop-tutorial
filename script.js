@@ -161,12 +161,14 @@ florInicio.innerHTML = crearFlorSVG(PLANTILLAS[0], "#b9a7ec");
 
 /* Calcula y muestra los días que lleváis juntos (contador de Bayas) */
 (function contarDias() {
-  const destino = document.getElementById("diasJuntos");
-  if (!destino) return;
   const hoy = new Date();
   const msPorDia = 1000 * 60 * 60 * 24;
   const dias = Math.max(0, Math.floor((hoy - CONFIG.fechaInicio) / msPorDia));
-  destino.textContent = dias.toLocaleString("es-ES");
+  const texto = dias.toLocaleString("es-ES");
+  const destino = document.getElementById("diasJuntos");
+  const subtitulo = document.getElementById("diasSubtitulo");
+  if (destino) destino.textContent = texto;
+  if (subtitulo) subtitulo.textContent = texto;
 })();
 
 /* ------------------------------------------------------------
