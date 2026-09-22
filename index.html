@@ -76,7 +76,6 @@
       <ul class="menu-links">
         <li><a href="#dedicatoria">💌 Carta</a></li>
         <li><a href="#galeria">📷 Fotos</a></li>
-        <li><a href="#jardin">🌷 Jardín</a></li>
         <li><a href="#momentos">📖 Momentos</a></li>
       </ul>
     </nav>
@@ -146,8 +145,11 @@
 
       <div class="galeria-grid">
 
-        <!-- FOTO 1. Sustituye images/foto1.jpg por otra si quieres. -->
+        <!-- FOTO 1. Sustituye images/foto1.jpg por otra si quieres.
+             (El <span class="vecino"> es un personaje que asoma; puedes
+              cambiar el emoji o quitarlo sin problema.) -->
         <figure class="foto">
+          <span class="vecino vecino-izq" aria-hidden="true">🐶</span>
           <img src="images/foto1.jpg" alt="Celebrando tu cumpleaños"
                loading="lazy"
                onerror="this.src='images/placeholder.svg'" />
@@ -164,6 +166,7 @@
 
         <!-- FOTO 3 -->
         <figure class="foto">
+          <span class="vecino vecino-der" aria-hidden="true">🐱</span>
           <img src="images/foto3.jpg" alt="En las fiestas"
                loading="lazy"
                onerror="this.src='images/placeholder.svg'" />
@@ -180,6 +183,7 @@
 
         <!-- FOTO 5 -->
         <figure class="foto">
+          <span class="vecino vecino-izq" aria-hidden="true">🦉</span>
           <img src="images/foto5.jpg" alt="Juntos, muy cerca"
                loading="lazy"
                onerror="this.src='images/placeholder.svg'" />
@@ -188,88 +192,6 @@
 
         <!-- Para AÑADIR más fotos: copia un bloque <figure>...</figure>
              completo aquí y cambia el src y el texto. -->
-
-      </div>
-    </section>
-
-
-    <!-- ================================================
-         SECCIÓN: JARDÍN DECORATIVO
-         Ilustraciones en SVG (sin copyright): margaritas,
-         tulipanes, rosas y lirios.
-         ================================================ -->
-    <section id="jardin" class="seccion">
-      <div class="separador-flores" aria-hidden="true"></div>
-
-      <h2 class="titulo-seccion">Nuestro jardín</h2>
-      <p class="intro-seccion">Cada flor, un motivo para quererte.</p>
-
-      <div class="jardin-grid">
-
-        <!-- Margarita -->
-        <div class="planta">
-          <svg viewBox="0 0 100 140" class="svg-planta">
-            <line x1="50" y1="60" x2="50" y2="135" stroke="#7bbf8a" stroke-width="5" />
-            <path d="M50 90 Q30 85 25 100 Q45 100 50 90" fill="#7bbf8a" />
-            <g>
-              <ellipse cx="50" cy="28" rx="8" ry="16" fill="#fff" />
-              <ellipse cx="50" cy="72" rx="8" ry="16" fill="#fff" />
-              <ellipse cx="28" cy="50" rx="16" ry="8" fill="#fff" />
-              <ellipse cx="72" cy="50" rx="16" ry="8" fill="#fff" />
-              <ellipse cx="35" cy="35" rx="10" ry="13" fill="#fff" transform="rotate(-45 35 35)" />
-              <ellipse cx="65" cy="35" rx="10" ry="13" fill="#fff" transform="rotate(45 65 35)" />
-              <ellipse cx="35" cy="65" rx="10" ry="13" fill="#fff" transform="rotate(45 35 65)" />
-              <ellipse cx="65" cy="65" rx="10" ry="13" fill="#fff" transform="rotate(-45 65 65)" />
-            </g>
-            <circle cx="50" cy="50" r="11" fill="#ffd76b" />
-          </svg>
-          <span class="nombre-planta">Margaritas</span>
-        </div>
-
-        <!-- Tulipán -->
-        <div class="planta">
-          <svg viewBox="0 0 100 140" class="svg-planta">
-            <line x1="50" y1="55" x2="50" y2="135" stroke="#7bbf8a" stroke-width="5" />
-            <path d="M50 90 Q72 85 76 102 Q54 102 50 90" fill="#7bbf8a" />
-            <path d="M30 45 Q30 20 50 18 Q70 20 70 45 Q70 62 50 62 Q30 62 30 45 Z" fill="#8e6fd4" />
-            <path d="M50 18 Q52 40 50 62" stroke="#6a4bb8" stroke-width="3" fill="none" />
-            <path d="M30 45 Q42 52 50 45" stroke="#6a4bb8" stroke-width="2" fill="none" />
-            <path d="M70 45 Q58 52 50 45" stroke="#6a4bb8" stroke-width="2" fill="none" />
-          </svg>
-          <span class="nombre-planta">Tulipanes</span>
-        </div>
-
-        <!-- Rosa -->
-        <div class="planta">
-          <svg viewBox="0 0 100 140" class="svg-planta">
-            <line x1="50" y1="60" x2="50" y2="135" stroke="#7bbf8a" stroke-width="5" />
-            <path d="M50 95 Q28 90 24 106 Q46 106 50 95" fill="#7bbf8a" />
-            <circle cx="50" cy="45" r="27" fill="#c86fb0" />
-            <circle cx="50" cy="45" r="18" fill="#d98bc4" />
-            <circle cx="50" cy="45" r="10" fill="#e8a9d6" />
-            <path d="M35 38 Q50 30 65 38" stroke="#a84f92" stroke-width="2" fill="none" />
-            <path d="M40 52 Q50 46 60 52" stroke="#a84f92" stroke-width="2" fill="none" />
-          </svg>
-          <span class="nombre-planta">Rosas</span>
-        </div>
-
-        <!-- Lirio -->
-        <div class="planta">
-          <svg viewBox="0 0 100 140" class="svg-planta">
-            <line x1="50" y1="60" x2="50" y2="135" stroke="#7bbf8a" stroke-width="5" />
-            <path d="M50 92 Q72 88 76 104 Q54 104 50 92" fill="#7bbf8a" />
-            <g fill="#b9a7ec">
-              <path d="M50 50 Q50 18 42 14 Q40 40 50 50" />
-              <path d="M50 50 Q50 18 58 14 Q60 40 50 50" />
-              <path d="M50 50 Q26 44 22 34 Q44 34 50 50" />
-              <path d="M50 50 Q74 44 78 34 Q56 34 50 50" />
-              <path d="M50 50 Q34 66 30 60 Q44 52 50 50" />
-              <path d="M50 50 Q66 66 70 60 Q56 52 50 50" />
-            </g>
-            <circle cx="50" cy="50" r="6" fill="#ffd76b" />
-          </svg>
-          <span class="nombre-planta">Lirios</span>
-        </div>
 
       </div>
     </section>
@@ -329,6 +251,18 @@
       </div>
     </section>
 
+
+    <!-- ---------- Bosque decorativo (árboles estilo AC) ---------- -->
+    <div class="bosque" aria-hidden="true">
+      <span class="arbol a1"></span>
+      <span class="arbol arbol-fruta a2"></span>
+      <span class="arbol a3"></span>
+      <span class="arbol arbol-fruta a4"></span>
+      <span class="arbol a5"></span>
+      <span class="arbusto"></span>
+      <span class="arbol arbol-fruta a6"></span>
+      <span class="arbol a7"></span>
+    </div>
 
     <!-- ---------- Pie ---------- -->
     <footer class="pie">

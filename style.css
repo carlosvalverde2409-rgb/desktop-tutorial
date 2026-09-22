@@ -466,7 +466,7 @@ h1, h2, h3, .marca, .texto-click {
 .foto {
   background: #fff;
   border-radius: 14px;
-  overflow: hidden;
+  overflow: visible;                 /* deja asomar a los vecinos */
   padding: 10px 10px 0;              /* marco polaroid */
   box-shadow: var(--sombra-ac);
   border: 1px solid rgba(120, 92, 60, 0.15);
@@ -494,50 +494,79 @@ h1, h2, h3, .marca, .texto-click {
   color: var(--ac-madera-osc);
 }
 
-/* ---------- Jardín (ilustraciones SVG) ---------- */
-.jardin-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 18px;
-  justify-items: center;
+/* ---------- Vecinos que asoman tras los marcos de las fotos ---------- */
+.foto { position: relative; }   /* para colocar al vecino */
+.vecino {
+  position: absolute;
+  top: -30px;
+  font-size: 2.4rem;
+  z-index: 3;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2));
+  animation: asomar 4s ease-in-out infinite;
+  pointer-events: none;
 }
-.planta {
+.vecino-izq { left: 8px;  transform-origin: bottom center; }
+.vecino-der { right: 8px; transform-origin: bottom center; }
+/* Aparecen y se esconden poco a poco, como espiando */
+@keyframes asomar {
+  0%, 100% { transform: translateY(10px) rotate(-6deg); opacity: 0.85; }
+  50%      { transform: translateY(-2px) rotate(6deg);  opacity: 1; }
+}
+
+/* ---------- Bosque decorativo (árboles estilo Animal Crossing) ---------- */
+.bosque {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  background: var(--ac-crema);
-  border-radius: var(--radio);
-  padding: 16px 16px 12px;
-  box-shadow: var(--sombra-ac);
-  border: 3px solid #fff;
-  width: 100%;
-  transition: transform 0.3s ease;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 30px 12px 0;
+  margin-top: 30px;
 }
-/* Macetita de tierra bajo cada flor (detalle AC) */
-.planta::after {
-  content: "";
-  width: 60%;
-  height: 10px;
-  border-radius: 0 0 10px 10px;
-  background: repeating-linear-gradient(90deg, #b98a5e 0 6px, #a9794f 6px 12px);
-  margin-top: 2px;
-}
-.planta:hover { transform: translateY(-6px); }
-.svg-planta {
+/* Árbol frondoso: tres copas redondas + tronco (SVG embebido) */
+.arbol {
   width: 90px;
   height: 130px;
+  background: no-repeat center bottom / contain
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Crect x='43' y='96' width='14' height='40' rx='4' fill='%239c6b45'/%3E%3Cellipse cx='50' cy='104' rx='36' ry='16' fill='%234f9d5e'/%3E%3Ccircle cx='50' cy='72' r='31' fill='%235aa84f'/%3E%3Ccircle cx='50' cy='48' r='25' fill='%236bbf5b'/%3E%3Ccircle cx='50' cy='28' r='17' fill='%237bc86b'/%3E%3C/svg%3E");
   transform-origin: bottom center;
-  animation: mecer 5s ease-in-out infinite;
+  animation: mecerArbol 6s ease-in-out infinite;
 }
-.planta:nth-child(2) .svg-planta { animation-delay: 0.6s; }
-.planta:nth-child(3) .svg-planta { animation-delay: 1.2s; }
-.planta:nth-child(4) .svg-planta { animation-delay: 1.8s; }
-@keyframes mecer {
-  0%, 100% { transform: rotate(-3deg); }
-  50%      { transform: rotate(3deg); }
+/* Variante con frutas (manzanas rojas) */
+.arbol-fruta {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Ccircle cx='34' cy='58' r='6' fill='%23e5484d'/%3E%3Ccircle cx='66' cy='60' r='6' fill='%23e5484d'/%3E%3Ccircle cx='50' cy='40' r='6' fill='%23e5484d'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Crect x='43' y='96' width='14' height='40' rx='4' fill='%239c6b45'/%3E%3Cellipse cx='50' cy='104' rx='36' ry='16' fill='%234f9d5e'/%3E%3Ccircle cx='50' cy='72' r='31' fill='%235aa84f'/%3E%3Ccircle cx='50' cy='48' r='25' fill='%236bbf5b'/%3E%3Ccircle cx='50' cy='28' r='17' fill='%237bc86b'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center bottom, center bottom;
+  background-size: contain, contain;
 }
-.nombre-planta { font-weight: 700; color: var(--ac-hoja-osc); }
+/* Tamaños/alturas variados para dar profundidad */
+.a1 { height: 120px; }
+.a2 { height: 140px; }
+.a3 { height: 108px; }
+.a4 { height: 134px; }
+.a5 { height: 116px; }
+.a6 { height: 128px; }
+.a7 { height: 112px; }
+.arbol.a2 { animation-delay: 0.8s; }
+.arbol.a4 { animation-delay: 1.4s; }
+.arbol.a6 { animation-delay: 0.4s; }
+@keyframes mecerArbol {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50%      { transform: rotate(1.5deg); }
+}
+/* Arbusto redondito entre los árboles */
+.arbusto {
+  width: 60px;
+  height: 46px;
+  align-self: flex-end;
+  border-radius: 50% 50% 45% 45%;
+  background: radial-gradient(circle at 40% 30%, #8ed47c, #5aa84f 75%);
+  box-shadow: inset 0 -6px 0 rgba(0,0,0,0.08);
+}
 
 /* ---------- Momentos: tablón de corcho del pueblo ---------- */
 .tablon {
