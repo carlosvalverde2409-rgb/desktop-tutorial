@@ -341,17 +341,18 @@ h1, h2, h3, .marca, .texto-click {
 }
 .anuncio-personaje {
   flex-shrink: 0;
-  width: 82px;
-  height: 82px;
+  width: 76px;
   display: grid;
-  place-items: center;
-  background: #fff;
-  border-radius: 50%;
-  border: 3px solid var(--ac-hoja);
-  overflow: hidden;
+  place-items: end center;
   animation: saludo 3.5s ease-in-out infinite;
+  transform-origin: bottom center;
 }
-.svg-personaje { width: 92%; height: 92%; display: block; }
+.svg-personaje {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.22));
+}
 @keyframes saludo { 0%,90%,100% { transform: rotate(0); } 94% { transform: rotate(-10deg); } 97% { transform: rotate(10deg); } }
 .anuncio-etiqueta {
   display: inline-block;
@@ -528,7 +529,7 @@ h1, h2, h3, .marca, .texto-click {
   background: #fff;
   border-radius: 14px;
   overflow: visible;                 /* deja asomar a los vecinos */
-  padding: 10px 10px 0;              /* marco polaroid */
+  padding: 12px 12px 16px;           /* marco polaroid */
   box-shadow: var(--sombra-ac);
   border: 1px solid rgba(120, 92, 60, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -542,17 +543,11 @@ h1, h2, h3, .marca, .texto-click {
 }
 .foto img {
   width: 100%;
-  height: 220px;
+  height: 320px;
   object-fit: cover;
   display: block;
   border-radius: 8px;
   background: var(--ac-arena);
-}
-.foto figcaption {
-  padding: 12px 6px 14px;
-  text-align: center;
-  font-weight: 700;
-  color: var(--ac-madera-osc);
 }
 
 /* ---------- Vecinos que asoman tras los marcos de las fotos ---------- */
@@ -660,6 +655,7 @@ h1, h2, h3, .marca, .texto-click {
   flex-direction: column;
   gap: 22px;
   position: relative;
+  min-height: 120px;
   padding: 26px 20px;
   border-radius: 18px;
   /* Textura de corcho */
@@ -737,7 +733,7 @@ h1, h2, h3, .marca, .texto-click {
 @media (max-width: 600px) {
   .menu { justify-content: center; }
   .menu-links { justify-content: center; }
-  .foto img { height: 190px; }
+  .foto img { height: 300px; }
   .momento { flex-direction: column; }
   .momento-fecha { min-width: auto; align-self: flex-start; }
   .flor-fondo { font-size: 2.2rem; }
