@@ -340,16 +340,17 @@ h1, h2, h3, .marca, .texto-click {
 }
 .anuncio-personaje {
   flex-shrink: 0;
-  font-size: 3rem;
-  width: 76px;
-  height: 76px;
+  width: 82px;
+  height: 82px;
   display: grid;
   place-items: center;
   background: #fff;
   border-radius: 50%;
   border: 3px solid var(--ac-hoja);
+  overflow: hidden;
   animation: saludo 3.5s ease-in-out infinite;
 }
+.svg-personaje { width: 92%; height: 92%; display: block; }
 @keyframes saludo { 0%,90%,100% { transform: rotate(0); } 94% { transform: rotate(-10deg); } 97% { transform: rotate(10deg); } }
 .anuncio-etiqueta {
   display: inline-block;
@@ -367,6 +368,65 @@ h1, h2, h3, .marca, .texto-click {
   margin-bottom: 6px;
 }
 .subtitulo { font-size: 1.1rem; color: var(--texto); }
+
+/* ---------- Cartel de madera de bienvenida ---------- */
+.cartel-madera {
+  position: relative;
+  z-index: 1;
+  width: max-content;
+  max-width: 90%;
+  margin: 30px auto 6px;
+  padding: 16px 34px 20px;
+  text-align: center;
+  border-radius: 12px;
+  /* Vetas de madera */
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 22px),
+    linear-gradient(180deg, #d19a63 0%, var(--ac-madera) 55%, var(--ac-madera-osc) 100%);
+  border: 4px solid #8a5c36;
+  box-shadow: var(--sombra-ac), inset 0 0 0 3px rgba(255,255,255,0.15);
+}
+/* Dos postes que sujetan el cartel */
+.cartel-madera::before,
+.cartel-madera::after {
+  content: "";
+  position: absolute;
+  bottom: -26px;
+  width: 12px;
+  height: 30px;
+  background: linear-gradient(90deg, #8a5c36, #6f472a);
+  border-radius: 3px;
+  z-index: -1;
+}
+.cartel-madera::before { left: 28px; }
+.cartel-madera::after  { right: 28px; }
+.cartel-texto {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 4vw, 1.7rem);
+  color: #fff8ec;
+  text-shadow: 0 2px 0 #6f472a, 0 0 2px rgba(0,0,0,0.3);
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Botón de música (silenciar/activar) ---------- */
+.btn-musica {
+  position: fixed;
+  top: 70px;
+  right: 16px;
+  z-index: 20;
+  width: 46px;
+  height: 46px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  background: var(--ac-crema);
+  border: 3px solid var(--ac-hoja);
+  border-radius: 50%;
+  box-shadow: var(--sombra-ac);
+  transition: transform 0.15s ease;
+}
+.btn-musica:hover { transform: scale(1.1); }
+.btn-musica.silenciado { filter: grayscale(1); opacity: 0.7; }
 
 /* Contador de días juntos (mostrador de Bayas) */
 .contador-bayas {
@@ -498,15 +558,16 @@ h1, h2, h3, .marca, .texto-click {
 .foto { position: relative; }   /* para colocar al vecino */
 .vecino {
   position: absolute;
-  top: -30px;
-  font-size: 2.4rem;
+  top: -46px;
+  width: 68px;
   z-index: 3;
   filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2));
   animation: asomar 4s ease-in-out infinite;
   pointer-events: none;
 }
-.vecino-izq { left: 8px;  transform-origin: bottom center; }
-.vecino-der { right: 8px; transform-origin: bottom center; }
+.vecino svg { width: 100%; height: auto; display: block; }
+.vecino-izq { left: 10px; transform-origin: bottom center; }
+.vecino-der { right: 10px; transform-origin: bottom center; }
 /* Aparecen y se esconden poco a poco, como espiando */
 @keyframes asomar {
   0%, 100% { transform: translateY(10px) rotate(-6deg); opacity: 0.85; }
