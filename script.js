@@ -233,3 +233,112 @@ document.addEventListener("mousemove", (e) => {
 /* ---------- Poner el año actual en el pie automáticamente ---------- */
 const anio = document.getElementById("anio");
 if (anio) anio.textContent = new Date().getFullYear();
+
+
+/* ============================================================
+   MÚSICA (creada con Web Audio API: notas sintetizadas, sin
+   archivos ni copyright). Suena una melodía alegre al pulsar
+   "Click aquí" y luego un fondo suave en bucle. Se puede
+   silenciar con el botón de la esquina.
+   ------------------------------------------------------------
+   AJUSTE: sube o baja el volumen general con CONFIG.volumen.
+   ============================================================ */
+const MUSICA = {
+  ctx: null,
+  master: null,
+  volumen: 0.14,   // volumen general (0 = mudo, 1 = alto)
+  bucle: null,
+  silenciado: false,
+
+  /* Crea el "motor" de audio (solo tras un click del usuario) */
+  iniciar() {
+    if (this.ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;                 // navegador sin soporte
+    this.ctx = new AC();
+    this.master = this.ctx.createGain();
+    this.master.gain.value = this.silenciado ? 0 : this.volumen;
+    this.master.connect(this.ctx.destination);
+  },
+
+  /* Toca una nota (frecuencia en Hz) con envolvente suave */
+  nota(freq, inicio, duracion, tipo = "triangle", vol = 0.5) {
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime + inicio;
+    const osc = this.ctx.createOscillator();
+    const g = this.ctx.createGain();
+    osc.type = tipo;
+    osc.frequency.value = freq;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(vol, t + 0.02);      // ataque
+    g.gain.exponentialRampToValueAtTime(0.001, t + duracion); // caída
+    osc.connect(g);
+    g.connect(this.master);
+    osc.start(t);
+    osc.stop(t + duracion + 0.05);
+  },
+
+  /* Melodía alegre de bienvenida (tipo "abrir el juego") */
+  melodiaInicio() {
+    // Notas (Do, Mi, Sol, Do agudo, La, Do agudo)
+    const n = [523.25, 659.25, 783.99, 1046.5, 880.0, 1046.5];
+    n.forEach((f, i) => this.nota(f, i * 0.14, 0.35, "triangle", 0.5));
+    // Un pequeño acorde final
+    [523.25, 659.25, 783.99].forEach((f) =>
+      this.nota(f, 0.9, 0.9, "sine", 0.35));
+  },
+
+  /* Fondo suave en bucle: pequeños arpegios relajados */
+  iniciarBucle() {
+    if (!this.ctx || this.bucle) return;
+    // Acordes pentatónicos suaves que se van alternando
+    const acordes = [
+      [392.0, 493.88, 587.33],  // Sol
+      [440.0, 523.25, 659.25],  // La menor-ish
+      [349.23, 440.0, 523.25],  // Fa
+      [392.0, 587.33, 783.99],  // Sol amplio
+    ];
+    let i = 0;
+    const tocar = () => {
+      const ac = acordes[i % acordes.length];
+      ac.forEach((f, j) => this.nota(f, j * 0.18, 1.6, "sine", 0.22));
+      i++;
+    };
+    tocar();
+    this.bucle = setInterval(tocar, 3200);
+  },
+
+  /* Silenciar / activar */
+  alternar() {
+    this.silenciado = !this.silenciado;
+    if (this.master) {
+      const t = this.ctx.currentTime;
+      this.master.gain.cancelScheduledValues(t);
+      this.master.gain.linearRampToValueAtTime(
+        this.silenciado ? 0 : this.volumen, t + 0.2);
+    }
+    return this.silenciado;
+  }
+};
+
+/* Al pulsar la flor de inicio: arrancar audio + melodía + bucle */
+botonInicio.addEventListener("click", () => {
+  MUSICA.iniciar();
+  MUSICA.melodiaInicio();
+  // El fondo empieza cuando ya se ve la web
+  setTimeout(() => MUSICA.iniciarBucle(), CONFIG.duracionAnimacion + 300);
+});
+
+/* Botón de silenciar/activar música */
+const btnMusica = document.getElementById("btnMusica");
+if (btnMusica) {
+  btnMusica.addEventListener("click", () => {
+    // Si aún no hay audio (por si acaso), lo arranca
+    MUSICA.iniciar();
+    if (!MUSICA.bucle) MUSICA.iniciarBucle();
+    const mudo = MUSICA.alternar();
+    btnMusica.textContent = mudo ? "🔇" : "🔊";
+    btnMusica.classList.toggle("silenciado", mudo);
+    btnMusica.setAttribute("aria-label", mudo ? "Activar música" : "Silenciar música");
+  });
+}

@@ -58,6 +58,9 @@
       <span class="nube n3"></span>
     </div>
 
+    <!-- Botón para silenciar / activar la musiquita (la crea script.js) -->
+    <button id="btnMusica" class="btn-musica" aria-label="Silenciar música">🔊</button>
+
     <!-- Frutas y hojas flotando de fondo (parallax suave) -->
     <div class="fondo-decorativo" aria-hidden="true">
       <span class="flor-fondo f1">🍎</span>
@@ -80,10 +83,31 @@
       </ul>
     </nav>
 
+    <!-- ---------- Cartel de madera de bienvenida (estilo AC) ---------- -->
+    <div class="cartel-madera">
+      <!-- EDITABLE: cambia el nombre de la isla aquí -->
+      <span class="cartel-texto">Isla de Carlos y Berta</span>
+    </div>
+
     <!-- ---------- Cabecera: anuncio estilo Canela/Isabelle ---------- -->
     <header id="inicio" class="hero">
       <div class="tarjeta hero-tarjeta anuncio">
-        <div class="anuncio-personaje" aria-hidden="true">🐶</div>
+        <!-- Personaje dibujado (perrita tipo Canela) -->
+        <div class="anuncio-personaje" aria-hidden="true">
+          <svg viewBox="0 0 100 100" class="svg-personaje">
+            <ellipse cx="26" cy="40" rx="12" ry="20" fill="#c98a5e"/>
+            <ellipse cx="74" cy="40" rx="12" ry="20" fill="#c98a5e"/>
+            <circle cx="50" cy="46" r="30" fill="#f2c777"/>
+            <ellipse cx="50" cy="59" rx="16" ry="12" fill="#fbe6b8"/>
+            <circle cx="40" cy="44" r="4" fill="#3a2e1a"/>
+            <circle cx="60" cy="44" r="4" fill="#3a2e1a"/>
+            <ellipse cx="50" cy="53" rx="4" ry="3" fill="#3a2e1a"/>
+            <path d="M50 56 Q46 61 42 58" stroke="#3a2e1a" stroke-width="1.6" fill="none"/>
+            <path d="M50 56 Q54 61 58 58" stroke="#3a2e1a" stroke-width="1.6" fill="none"/>
+            <circle cx="33" cy="52" r="3.5" fill="#f3a0a0" opacity="0.6"/>
+            <circle cx="67" cy="52" r="3.5" fill="#f3a0a0" opacity="0.6"/>
+          </svg>
+        </div>
         <div class="anuncio-texto">
           <span class="anuncio-etiqueta">📢 Anuncio de hoy</span>
           <!-- EDITABLE: título y subtítulo de bienvenida -->
@@ -149,7 +173,22 @@
              (El <span class="vecino"> es un personaje que asoma; puedes
               cambiar el emoji o quitarlo sin problema.) -->
         <figure class="foto">
-          <span class="vecino vecino-izq" aria-hidden="true">🐶</span>
+          <span class="vecino vecino-izq" aria-hidden="true">
+            <!-- Perrita tipo Canela -->
+            <svg viewBox="0 0 100 100">
+              <ellipse cx="26" cy="40" rx="12" ry="20" fill="#c98a5e"/>
+              <ellipse cx="74" cy="40" rx="12" ry="20" fill="#c98a5e"/>
+              <circle cx="50" cy="46" r="30" fill="#f2c777"/>
+              <ellipse cx="50" cy="59" rx="16" ry="12" fill="#fbe6b8"/>
+              <circle cx="40" cy="44" r="4" fill="#3a2e1a"/>
+              <circle cx="60" cy="44" r="4" fill="#3a2e1a"/>
+              <ellipse cx="50" cy="53" rx="4" ry="3" fill="#3a2e1a"/>
+              <path d="M50 56 Q46 61 42 58" stroke="#3a2e1a" stroke-width="1.6" fill="none"/>
+              <path d="M50 56 Q54 61 58 58" stroke="#3a2e1a" stroke-width="1.6" fill="none"/>
+              <circle cx="33" cy="52" r="3.5" fill="#f3a0a0" opacity="0.6"/>
+              <circle cx="67" cy="52" r="3.5" fill="#f3a0a0" opacity="0.6"/>
+            </svg>
+          </span>
           <img src="images/foto1.jpg" alt="Celebrando tu cumpleaños"
                loading="lazy"
                onerror="this.src='images/placeholder.svg'" />
@@ -166,7 +205,24 @@
 
         <!-- FOTO 3 -->
         <figure class="foto">
-          <span class="vecino vecino-der" aria-hidden="true">🐱</span>
+          <span class="vecino vecino-der" aria-hidden="true">
+            <!-- Gatito -->
+            <svg viewBox="0 0 100 100">
+              <path d="M24 24 L38 46 L20 48 Z" fill="#9aa7b2"/>
+              <path d="M76 24 L62 46 L80 48 Z" fill="#9aa7b2"/>
+              <circle cx="50" cy="48" r="30" fill="#c3ccd4"/>
+              <ellipse cx="50" cy="60" rx="15" ry="11" fill="#eef2f5"/>
+              <circle cx="40" cy="46" r="4" fill="#2c3138"/>
+              <circle cx="60" cy="46" r="4" fill="#2c3138"/>
+              <path d="M50 54 l-4 4 h8 Z" fill="#f39ab0"/>
+              <path d="M50 58 Q46 63 42 60" stroke="#2c3138" stroke-width="1.6" fill="none"/>
+              <path d="M50 58 Q54 63 58 60" stroke="#2c3138" stroke-width="1.6" fill="none"/>
+              <line x1="20" y1="56" x2="36" y2="56" stroke="#8a939c" stroke-width="1.4"/>
+              <line x1="20" y1="61" x2="36" y2="60" stroke="#8a939c" stroke-width="1.4"/>
+              <line x1="64" y1="56" x2="80" y2="56" stroke="#8a939c" stroke-width="1.4"/>
+              <line x1="64" y1="60" x2="80" y2="61" stroke="#8a939c" stroke-width="1.4"/>
+            </svg>
+          </span>
           <img src="images/foto3.jpg" alt="En las fiestas"
                loading="lazy"
                onerror="this.src='images/placeholder.svg'" />
@@ -183,7 +239,20 @@
 
         <!-- FOTO 5 -->
         <figure class="foto">
-          <span class="vecino vecino-izq" aria-hidden="true">🦉</span>
+          <span class="vecino vecino-izq" aria-hidden="true">
+            <!-- Búho -->
+            <svg viewBox="0 0 100 100">
+              <path d="M26 20 Q30 34 40 34 Q30 30 30 20 Z" fill="#8a6a4a"/>
+              <path d="M74 20 Q70 34 60 34 Q70 30 70 20 Z" fill="#8a6a4a"/>
+              <ellipse cx="50" cy="52" rx="32" ry="30" fill="#a97e57"/>
+              <ellipse cx="50" cy="60" rx="20" ry="18" fill="#d8c19c"/>
+              <circle cx="39" cy="48" r="11" fill="#fff"/>
+              <circle cx="61" cy="48" r="11" fill="#fff"/>
+              <circle cx="39" cy="48" r="5" fill="#2c2118"/>
+              <circle cx="61" cy="48" r="5" fill="#2c2118"/>
+              <path d="M50 54 l-6 5 h12 Z" fill="#f0a52e"/>
+            </svg>
+          </span>
           <img src="images/foto5.jpg" alt="Juntos, muy cerca"
                loading="lazy"
                onerror="this.src='images/placeholder.svg'" />
