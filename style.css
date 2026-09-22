@@ -558,20 +558,23 @@ h1, h2, h3, .marca, .texto-click {
 .foto { position: relative; }   /* para colocar al vecino */
 .vecino {
   position: absolute;
-  top: -46px;
-  width: 68px;
-  z-index: 3;
-  filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2));
-  animation: asomar 4s ease-in-out infinite;
+  top: -78px;            /* sube el personaje: la foto tapa su cuerpo y asoma arriba */
+  width: 92px;
+  z-index: 0;            /* detrás de la foto: solo asoma la parte de arriba */
+  filter: drop-shadow(0 4px 5px rgba(0,0,0,0.25));
+  animation: asomar 4.5s ease-in-out infinite;
+  transform-origin: bottom center;
   pointer-events: none;
 }
-.vecino svg { width: 100%; height: auto; display: block; }
-.vecino-izq { left: 10px; transform-origin: bottom center; }
-.vecino-der { right: 10px; transform-origin: bottom center; }
-/* Aparecen y se esconden poco a poco, como espiando */
+.vecino img { width: 100%; height: auto; display: block; }
+.vecino-izq { left: -14px; }
+.vecino-der { right: -14px; }
+/* La foto va por delante para tapar el cuerpo del personaje */
+.foto img { position: relative; z-index: 1; }
+/* Asoman/espían con un balanceo suave */
 @keyframes asomar {
-  0%, 100% { transform: translateY(10px) rotate(-6deg); opacity: 0.85; }
-  50%      { transform: translateY(-2px) rotate(6deg);  opacity: 1; }
+  0%, 100% { transform: translateY(6px) rotate(-3deg); }
+  50%      { transform: translateY(0)   rotate(3deg); }
 }
 
 /* ---------- Bosque decorativo (árboles estilo Animal Crossing) ---------- */
