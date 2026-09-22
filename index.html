@@ -50,34 +50,57 @@
        ============================================================ -->
   <main id="principal" class="principal oculto">
 
-    <!-- Flores decorativas de fondo (parallax suave) -->
-    <div class="fondo-decorativo" aria-hidden="true">
-      <span class="flor-fondo f1">🌷</span>
-      <span class="flor-fondo f2">🌼</span>
-      <span class="flor-fondo f3">🌹</span>
-      <span class="flor-fondo f4">🌸</span>
-      <span class="flor-fondo f5">🪻</span>
+    <!-- Cielo de isla (Animal Crossing): sol y nubes que van pasando -->
+    <div class="cielo-isla" aria-hidden="true">
+      <div class="sol"></div>
+      <span class="nube n1"></span>
+      <span class="nube n2"></span>
+      <span class="nube n3"></span>
     </div>
 
-    <!-- ---------- Menú de navegación ---------- -->
+    <!-- Frutas y hojas flotando de fondo (parallax suave) -->
+    <div class="fondo-decorativo" aria-hidden="true">
+      <span class="flor-fondo f1">🍎</span>
+      <span class="flor-fondo f2">🍃</span>
+      <span class="flor-fondo f3">🍒</span>
+      <span class="flor-fondo f4">🍐</span>
+      <span class="flor-fondo f5">🍊</span>
+      <span class="flor-fondo f6">🌸</span>
+    </div>
+
+    <!-- ---------- Menú de navegación (pestañas estilo NookPhone) ---------- -->
     <nav class="menu">
-      <a href="#inicio" class="marca">🌸 Nosotros</a>
+      <a href="#inicio" class="marca">
+        <span class="hoja-marca" aria-hidden="true"></span> Nuestra Isla
+      </a>
       <ul class="menu-links">
-        <li><a href="#dedicatoria">Carta</a></li>
-        <li><a href="#galeria">Fotos</a></li>
-        <li><a href="#jardin">Jardín</a></li>
-        <li><a href="#momentos">Momentos</a></li>
+        <li><a href="#dedicatoria">💌 Carta</a></li>
+        <li><a href="#galeria">📷 Fotos</a></li>
+        <li><a href="#jardin">🌷 Jardín</a></li>
+        <li><a href="#momentos">📖 Momentos</a></li>
       </ul>
     </nav>
 
-    <!-- ---------- Cabecera / bienvenida ---------- -->
+    <!-- ---------- Cabecera: anuncio estilo Canela/Isabelle ---------- -->
     <header id="inicio" class="hero">
-      <div class="tarjeta hero-tarjeta">
-        <!-- EDITABLE: título y subtítulo de bienvenida -->
-        <h1>Feliz medio año 🌷</h1>
-        <p class="subtitulo">
-          Seis meses contigo y sigo pensando que eres lo mejor que me ha pasado.
-        </p>
+      <div class="tarjeta hero-tarjeta anuncio">
+        <div class="anuncio-personaje" aria-hidden="true">🐶</div>
+        <div class="anuncio-texto">
+          <span class="anuncio-etiqueta">📢 Anuncio de hoy</span>
+          <!-- EDITABLE: título y subtítulo de bienvenida -->
+          <h1>¡Feliz medio año! 🍃</h1>
+          <p class="subtitulo">
+            Bienvenida a nuestra isla. Seis meses contigo y sigues siendo
+            lo mejor que me ha pasado.
+          </p>
+        </div>
+      </div>
+
+      <!-- Contador de días juntos (estilo mostrador de Bayas / Nook Miles) -->
+      <div class="contador-bayas">
+        <span class="baya" aria-hidden="true"></span>
+        <span class="contador-numero" id="diasJuntos">—</span>
+        <span class="contador-label">días juntos</span>
       </div>
     </header>
 
@@ -261,12 +284,12 @@
     <section id="momentos" class="seccion">
       <div class="separador-flores" aria-hidden="true"></div>
 
-      <h2 class="titulo-seccion">Nuestros momentos</h2>
+      <h2 class="titulo-seccion">Tablón de recuerdos</h2>
       <p class="intro-seccion">
-        Esta lista irá creciendo con cada recuerdo nuevo. 🌱
+        Como el tablón del pueblo: aquí iremos clavando cada recuerdo nuevo. 🌱
       </p>
 
-      <div class="momentos-lista">
+      <div class="momentos-lista tablon">
 
         <!-- MOMENTO (plantilla). Copia este bloque para añadir más. -->
         <article class="momento">
@@ -309,7 +332,8 @@
 
     <!-- ---------- Pie ---------- -->
     <footer class="pie">
-      <p>Hecho con 💜 para ti · <span id="anio"></span></p>
+      <div class="cesped-pie" aria-hidden="true"></div>
+      <p>Hecho con 💜 en nuestra isla · <span id="anio"></span></p>
     </footer>
 
   </main>
