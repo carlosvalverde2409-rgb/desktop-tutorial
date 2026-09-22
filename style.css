@@ -554,8 +554,8 @@ h1, h2, h3, .marca, .texto-click {
 .foto { position: relative; }   /* para colocar al vecino */
 .vecino {
   position: absolute;
-  top: -24px;            /* asoma por una esquina, entero y por delante */
-  width: 82px;
+  top: -18px;            /* asoma por una esquina, entero y por delante */
+  width: 58px;
   z-index: 3;
   filter: drop-shadow(0 5px 5px rgba(0,0,0,0.28));
   animation: asomar 4.5s ease-in-out infinite;
@@ -564,8 +564,8 @@ h1, h2, h3, .marca, .texto-click {
 }
 .vecino img { width: 100%; height: auto; display: block; }
 /* Se apoyan en el lateral del marco, sin tapar la foto */
-.vecino-izq { left: -46px; }
-.vecino-der { right: -46px; }
+.vecino-izq { left: -22px; }
+.vecino-der { right: -22px; }
 .foto img { position: relative; z-index: 1; }
 /* Balanceo suave, como saludando */
 @keyframes asomar {
@@ -741,9 +741,9 @@ h1, h2, h3, .marca, .texto-click {
   .anuncio { flex-direction: column; text-align: center; }
   .sol { width: 64px; height: 64px; top: 14px; right: 18px; }
   /* Vecinos algo más pegados al marco en móvil */
-  .vecino { width: 72px; }
-  .vecino-izq { left: -26px; }
-  .vecino-der { right: -26px; }
+  .vecino { width: 50px; }
+  .vecino-izq { left: -10px; }
+  .vecino-der { right: -10px; }
 }
 
 /* Respeta a quien prefiere menos animaciones */
