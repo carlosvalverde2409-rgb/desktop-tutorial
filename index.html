@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Quicksand:wght@400;500;600&family=Press+Start+2P&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="style.css" />
@@ -30,26 +30,16 @@
        ============================================================ -->
   <section id="portada" class="portada">
 
-    <!-- Flor central pequeña (SVG) sobre la que se hace click -->
+    <!-- Cielo pixelado de fondo (estrellas estilo galaxia Star Wars) -->
+    <div id="cieloPixel" class="cielo-pixel" aria-hidden="true"></div>
+
+    <!-- Flor central estilo Minecraft (la dibuja script.js dentro de #florInicio) -->
     <button id="botonInicio" class="flor-inicio" aria-label="Empezar">
-      <!-- SVG de una margarita simple -->
-      <svg viewBox="0 0 100 100" class="svg-flor-inicio">
-        <g class="petalos-inicio">
-          <ellipse cx="50" cy="22" rx="10" ry="18" fill="#fff" />
-          <ellipse cx="50" cy="78" rx="10" ry="18" fill="#fff" />
-          <ellipse cx="22" cy="50" rx="18" ry="10" fill="#fff" />
-          <ellipse cx="78" cy="50" rx="18" ry="10" fill="#fff" />
-          <ellipse cx="31" cy="31" rx="12" ry="15" fill="#fff" transform="rotate(-45 31 31)" />
-          <ellipse cx="69" cy="31" rx="12" ry="15" fill="#fff" transform="rotate(45 69 31)" />
-          <ellipse cx="31" cy="69" rx="12" ry="15" fill="#fff" transform="rotate(45 31 69)" />
-          <ellipse cx="69" cy="69" rx="12" ry="15" fill="#fff" transform="rotate(-45 69 69)" />
-        </g>
-        <circle cx="50" cy="50" r="13" fill="#ffd76b" />
-      </svg>
-      <span class="texto-click">Click aquí</span>
+      <span id="florInicio" class="flor-inicio-pixel"></span>
+      <span class="texto-click">▶ Click aquí</span>
     </button>
 
-    <!-- Contenedor donde JS "planta" el campo de flores animado -->
+    <!-- Contenedor donde JS "planta" el campo de flores pixeladas -->
     <div id="campoFlores" class="campo-flores" aria-hidden="true"></div>
   </section>
 
