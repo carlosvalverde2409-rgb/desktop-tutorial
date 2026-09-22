@@ -19,7 +19,7 @@ const CONFIG = {
   /* EDITABLE: fecha en la que empezasteis (AAAA, MM, DD).
      OJO: el mes va de 0 a 11 -> enero = 0, junio = 5, etc.
      Con esto se calcula el contador "días juntos" del inicio. */
-  fechaInicio: new Date(2025, 2, 22), // 22 de marzo de 2025 (cámbiala)
+  fechaInicio: new Date(2026, 3, 13), // 13 de abril de 2026
 
   /* Colores de los pétalos (los "tipos" de flor se mezclan con estos).
      Pensados como favoritos: morados, rosas, azul y verde sable (Star
