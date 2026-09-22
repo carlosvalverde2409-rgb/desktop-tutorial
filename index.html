@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestro Medio Año 🌸</title>
+
+  <!-- ============================================================
+       HOJAS DE ESTILO
+       - style.css  : todos los estilos de la web
+       Tipografías amigables (redondeadas, estilo Animal Crossing)
+       vía Google Fonts. Si no hay internet, se usa una fuente del
+       sistema como respaldo.
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       1) PORTADA / INTRO
+       Pantalla inicial con una flor pequeña centrada y "Click aquí".
+       Al hacer click se lanza la animación del campo de flores.
+       ============================================================ -->
+  <section id="portada" class="portada">
+
+    <!-- Flor central pequeña (SVG) sobre la que se hace click -->
+    <button id="botonInicio" class="flor-inicio" aria-label="Empezar">
+      <!-- SVG de una margarita simple -->
+      <svg viewBox="0 0 100 100" class="svg-flor-inicio">
+        <g class="petalos-inicio">
+          <ellipse cx="50" cy="22" rx="10" ry="18" fill="#fff" />
+          <ellipse cx="50" cy="78" rx="10" ry="18" fill="#fff" />
+          <ellipse cx="22" cy="50" rx="18" ry="10" fill="#fff" />
+          <ellipse cx="78" cy="50" rx="18" ry="10" fill="#fff" />
+          <ellipse cx="31" cy="31" rx="12" ry="15" fill="#fff" transform="rotate(-45 31 31)" />
+          <ellipse cx="69" cy="31" rx="12" ry="15" fill="#fff" transform="rotate(45 69 31)" />
+          <ellipse cx="31" cy="69" rx="12" ry="15" fill="#fff" transform="rotate(45 31 69)" />
+          <ellipse cx="69" cy="69" rx="12" ry="15" fill="#fff" transform="rotate(-45 69 69)" />
+        </g>
+        <circle cx="50" cy="50" r="13" fill="#ffd76b" />
+      </svg>
+      <span class="texto-click">Click aquí</span>
+    </button>
+
+    <!-- Contenedor donde JS "planta" el campo de flores animado -->
+    <div id="campoFlores" class="campo-flores" aria-hidden="true"></div>
+  </section>
+
+
+  <!-- ============================================================
+       2) INTERFAZ PRINCIPAL
+       Oculta al inicio (clase .oculto). Se revela tras la animación.
+       ============================================================ -->
+  <main id="principal" class="principal oculto">
+
+    <!-- Flores decorativas de fondo (parallax suave) -->
+    <div class="fondo-decorativo" aria-hidden="true">
+      <span class="flor-fondo f1">🌷</span>
+      <span class="flor-fondo f2">🌼</span>
+      <span class="flor-fondo f3">🌹</span>
+      <span class="flor-fondo f4">🌸</span>
+      <span class="flor-fondo f5">🪻</span>
+    </div>
+
+    <!-- ---------- Menú de navegación ---------- -->
+    <nav class="menu">
+      <a href="#inicio" class="marca">🌸 Nosotros</a>
+      <ul class="menu-links">
+        <li><a href="#dedicatoria">Carta</a></li>
+        <li><a href="#galeria">Fotos</a></li>
+        <li><a href="#jardin">Jardín</a></li>
+        <li><a href="#momentos">Momentos</a></li>
+      </ul>
+    </nav>
+
+    <!-- ---------- Cabecera / bienvenida ---------- -->
+    <header id="inicio" class="hero">
+      <div class="tarjeta hero-tarjeta">
+        <!-- EDITABLE: título y subtítulo de bienvenida -->
+        <h1>Feliz medio año 🌷</h1>
+        <p class="subtitulo">
+          Seis meses contigo y sigo pensando que eres lo mejor que me ha pasado.
+        </p>
+      </div>
+    </header>
+
+
+    <!-- ================================================
+         SECCIÓN: DEDICATORIA / CARTA
+         EDITABLE: cambia el texto libremente aquí abajo.
+         ================================================ -->
+    <section id="dedicatoria" class="seccion">
+      <!-- Separador de flores (SVG) reutilizable -->
+      <div class="separador-flores" aria-hidden="true"></div>
+
+      <h2 class="titulo-seccion">Una carta para ti</h2>
+
+      <div class="tarjeta carta">
+        <!-- EDITABLE: escribe aquí tu dedicatoria. Cada <p> es un párrafo. -->
+        <p>Mi amor,</p>
+        <p>
+          No sé muy bien cómo caben tantas cosas bonitas en solo medio año,
+          pero contigo el tiempo se siente distinto: más cálido, más ligero,
+          más nuestro.
+        </p>
+        <p>
+          Gracias por cada risa, cada abrazo y cada día en que eliges quedarte.
+          Hice esta pequeña web para guardar aquí, poquito a poco, todos los
+          recuerdos que nos quedan por vivir.
+        </p>
+        <p class="firma">Con todo mi cariño 💜</p>
+      </div>
+    </section>
+
+
+    <!-- ================================================
+         SECCIÓN: GALERÍA DE FOTOS
+         EDITABLE: para añadir fotos, copia un bloque <figure>
+         y cambia el src y el texto. Pon tus imágenes en /images/.
+         ================================================ -->
+    <section id="galeria" class="seccion">
+      <div class="separador-flores" aria-hidden="true"></div>
+
+      <h2 class="titulo-seccion">Nuestras fotos</h2>
+      <p class="intro-seccion">Algunos momentos que no quiero olvidar.</p>
+
+      <div class="galeria-grid">
+
+        <!-- FOTO 1 (placeholder). Sustituye images/foto1.jpg por la tuya. -->
+        <figure class="foto">
+          <img src="images/foto1.jpg" alt="Nuestro primer recuerdo"
+               loading="lazy"
+               onerror="this.src='images/placeholder.svg'" />
+          <figcaption>Nuestro primer día 🌸</figcaption>
+        </figure>
+
+        <!-- FOTO 2 -->
+        <figure class="foto">
+          <img src="images/foto2.jpg" alt="Un momento juntos"
+               loading="lazy"
+               onerror="this.src='images/placeholder.svg'" />
+          <figcaption>Ese viaje que nos encantó ✨</figcaption>
+        </figure>
+
+        <!-- FOTO 3 -->
+        <figure class="foto">
+          <img src="images/foto3.jpg" alt="Sonriendo contigo"
+               loading="lazy"
+               onerror="this.src='images/placeholder.svg'" />
+          <figcaption>Tu sonrisa favorita 💜</figcaption>
+        </figure>
+
+        <!-- Para AÑADIR más fotos: copia un bloque <figure>...</figure>
+             completo aquí y cambia el src y el texto. -->
+
+      </div>
+    </section>
+
+
+    <!-- ================================================
+         SECCIÓN: JARDÍN DECORATIVO
+         Ilustraciones en SVG (sin copyright): margaritas,
+         tulipanes, rosas y lirios.
+         ================================================ -->
+    <section id="jardin" class="seccion">
+      <div class="separador-flores" aria-hidden="true"></div>
+
+      <h2 class="titulo-seccion">Nuestro jardín</h2>
+      <p class="intro-seccion">Cada flor, un motivo para quererte.</p>
+
+      <div class="jardin-grid">
+
+        <!-- Margarita -->
+        <div class="planta">
+          <svg viewBox="0 0 100 140" class="svg-planta">
+            <line x1="50" y1="60" x2="50" y2="135" stroke="#7bbf8a" stroke-width="5" />
+            <path d="M50 90 Q30 85 25 100 Q45 100 50 90" fill="#7bbf8a" />
+            <g>
+              <ellipse cx="50" cy="28" rx="8" ry="16" fill="#fff" />
+              <ellipse cx="50" cy="72" rx="8" ry="16" fill="#fff" />
+              <ellipse cx="28" cy="50" rx="16" ry="8" fill="#fff" />
+              <ellipse cx="72" cy="50" rx="16" ry="8" fill="#fff" />
+              <ellipse cx="35" cy="35" rx="10" ry="13" fill="#fff" transform="rotate(-45 35 35)" />
+              <ellipse cx="65" cy="35" rx="10" ry="13" fill="#fff" transform="rotate(45 65 35)" />
+              <ellipse cx="35" cy="65" rx="10" ry="13" fill="#fff" transform="rotate(45 35 65)" />
+              <ellipse cx="65" cy="65" rx="10" ry="13" fill="#fff" transform="rotate(-45 65 65)" />
+            </g>
+            <circle cx="50" cy="50" r="11" fill="#ffd76b" />
+          </svg>
+          <span class="nombre-planta">Margaritas</span>
+        </div>
+
+        <!-- Tulipán -->
+        <div class="planta">
+          <svg viewBox="0 0 100 140" class="svg-planta">
+            <line x1="50" y1="55" x2="50" y2="135" stroke="#7bbf8a" stroke-width="5" />
+            <path d="M50 90 Q72 85 76 102 Q54 102 50 90" fill="#7bbf8a" />
+            <path d="M30 45 Q30 20 50 18 Q70 20 70 45 Q70 62 50 62 Q30 62 30 45 Z" fill="#8e6fd4" />
+            <path d="M50 18 Q52 40 50 62" stroke="#6a4bb8" stroke-width="3" fill="none" />
+            <path d="M30 45 Q42 52 50 45" stroke="#6a4bb8" stroke-width="2" fill="none" />
+            <path d="M70 45 Q58 52 50 45" stroke="#6a4bb8" stroke-width="2" fill="none" />
+          </svg>
+          <span class="nombre-planta">Tulipanes</span>
+        </div>
+
+        <!-- Rosa -->
+        <div class="planta">
+          <svg viewBox="0 0 100 140" class="svg-planta">
+            <line x1="50" y1="60" x2="50" y2="135" stroke="#7bbf8a" stroke-width="5" />
+            <path d="M50 95 Q28 90 24 106 Q46 106 50 95" fill="#7bbf8a" />
+            <circle cx="50" cy="45" r="27" fill="#c86fb0" />
+            <circle cx="50" cy="45" r="18" fill="#d98bc4" />
+            <circle cx="50" cy="45" r="10" fill="#e8a9d6" />
+            <path d="M35 38 Q50 30 65 38" stroke="#a84f92" stroke-width="2" fill="none" />
+            <path d="M40 52 Q50 46 60 52" stroke="#a84f92" stroke-width="2" fill="none" />
+          </svg>
+          <span class="nombre-planta">Rosas</span>
+        </div>
+
+        <!-- Lirio -->
+        <div class="planta">
+          <svg viewBox="0 0 100 140" class="svg-planta">
+            <line x1="50" y1="60" x2="50" y2="135" stroke="#7bbf8a" stroke-width="5" />
+            <path d="M50 92 Q72 88 76 104 Q54 104 50 92" fill="#7bbf8a" />
+            <g fill="#b9a7ec">
+              <path d="M50 50 Q50 18 42 14 Q40 40 50 50" />
+              <path d="M50 50 Q50 18 58 14 Q60 40 50 50" />
+              <path d="M50 50 Q26 44 22 34 Q44 34 50 50" />
+              <path d="M50 50 Q74 44 78 34 Q56 34 50 50" />
+              <path d="M50 50 Q34 66 30 60 Q44 52 50 50" />
+              <path d="M50 50 Q66 66 70 60 Q56 52 50 50" />
+            </g>
+            <circle cx="50" cy="50" r="6" fill="#ffd76b" />
+          </svg>
+          <span class="nombre-planta">Lirios</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================================================
+         SECCIÓN: MOMENTOS / RECUERDOS (AMPLIABLE)
+         EDITABLE: para añadir un momento nuevo, copia un bloque
+         <article class="momento"> y cambia fecha, título y texto.
+         Los más nuevos van arriba.
+         ================================================ -->
+    <section id="momentos" class="seccion">
+      <div class="separador-flores" aria-hidden="true"></div>
+
+      <h2 class="titulo-seccion">Nuestros momentos</h2>
+      <p class="intro-seccion">
+        Esta lista irá creciendo con cada recuerdo nuevo. 🌱
+      </p>
+
+      <div class="momentos-lista">
+
+        <!-- MOMENTO (plantilla). Copia este bloque para añadir más. -->
+        <article class="momento">
+          <span class="momento-fecha">Mes 6</span>
+          <div class="tarjeta momento-tarjeta">
+            <h3>Medio año juntos</h3>
+            <p>
+              Hoy celebramos seis meses. Hice esta web para ti, con todo el
+              cariño del mundo. Que vengan muchos más.
+            </p>
+          </div>
+        </article>
+
+        <article class="momento">
+          <span class="momento-fecha">Mes 3</span>
+          <div class="tarjeta momento-tarjeta">
+            <h3>Un recuerdo especial</h3>
+            <p>
+              (Aquí puedes escribir un recuerdo bonito de este mes.)
+            </p>
+          </div>
+        </article>
+
+        <article class="momento">
+          <span class="momento-fecha">Mes 1</span>
+          <div class="tarjeta momento-tarjeta">
+            <h3>El principio de todo</h3>
+            <p>
+              (Cuenta aquí cómo empezó nuestra historia.)
+            </p>
+          </div>
+        </article>
+
+        <!-- Para AÑADIR un momento: copia un bloque <article class="momento">
+             completo y ponlo arriba del todo. -->
+
+      </div>
+    </section>
+
+
+    <!-- ---------- Pie ---------- -->
+    <footer class="pie">
+      <p>Hecho con 💜 para ti · <span id="anio"></span></p>
+    </footer>
+
+  </main>
+
+  <!-- ============================================================
+       LÓGICA (JavaScript vanilla)
+       ============================================================ -->
+  <script src="script.js"></script>
+</body>
+</html>
