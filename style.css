@@ -15,9 +15,23 @@
   --lila-fondo2:   #e3d9f7;
   --verde-suave:   #7bbf8a;   /* verde de tallos/detalles */
   --blanco:        #ffffff;
-  --texto:         #3a3358;   /* texto principal (morado oscuro legible) */
+  --texto:         #4a4030;   /* texto principal (marrón cálido legible) */
   --sombra:        0 8px 24px rgba(75, 63, 158, 0.18);
   --radio:         22px;      /* bordes redondeados (estilo cute) */
+
+  /* ---- Paleta Animal Crossing (isla) ---- */
+  --ac-cielo:      #8fd3f4;   /* azul cielo */
+  --ac-cielo2:     #bfe8f7;
+  --ac-cesped:     #7ec86b;   /* verde césped */
+  --ac-cesped2:    #6bbf5b;
+  --ac-arena:      #f5e6c8;   /* arena de playa */
+  --ac-madera:     #c98a5e;   /* madera Nook */
+  --ac-madera-osc: #9c6b45;
+  --ac-crema:      #fff8ec;   /* panel crema (diálogos) */
+  --ac-hoja:       #7bc86b;   /* verde hoja */
+  --ac-hoja-osc:   #4f9d5e;
+  --ac-baya:       #ffb638;   /* amarillo baya/campana */
+  --sombra-ac:     0 8px 0 rgba(120, 92, 60, 0.18); /* sombra "bloque" cute */
 }
 
 /* ---------- Reset básico ---------- */
@@ -28,7 +42,10 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'Quicksand', 'Segoe UI', system-ui, sans-serif;
   color: var(--texto);
-  background: var(--lila-fondo);
+  /* Fondo isla: cielo arriba que se funde en césped */
+  background:
+    linear-gradient(180deg, var(--ac-cielo) 0%, var(--ac-cielo2) 18%, #dff2d6 40%, #cdeec2 100%);
+  background-attachment: fixed;
   line-height: 1.6;
 }
 
@@ -41,7 +58,7 @@ h1, h2, h3, .marca, .texto-click {
 
 
 /* ============================================================
-   1) PORTADA / INTRO  (estilo pixel-art: Minecraft + galaxia Star Wars)
+   1) PORTADA / INTRO  (flores pixeladas estilo Minecraft sobre isla AC)
    ============================================================ */
 .portada {
   position: fixed;
@@ -49,32 +66,47 @@ h1, h2, h3, .marca, .texto-click {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Cielo de galaxia: índigo profundo -> morado */
+  /* Cielo de isla Animal Crossing: azul cielo -> césped abajo */
   background:
-    radial-gradient(circle at 50% 120%, rgba(142,111,212,0.55) 0%, rgba(0,0,0,0) 55%),
-    radial-gradient(circle at 20% 20%, rgba(79,176,255,0.20) 0%, rgba(0,0,0,0) 40%),
-    linear-gradient(160deg, #1a1440 0%, #2a1f6e 45%, #4b3f9e 100%);
+    radial-gradient(circle at 78% 16%, rgba(255,236,150,0.9) 0%, rgba(255,236,150,0) 22%), /* sol */
+    linear-gradient(180deg, #8fd3f4 0%, #bfe8f7 45%, #d7f0d2 62%, #7ec86b 62%, #6bbf5b 100%);
   z-index: 100;
   overflow: hidden;
   transition: opacity 0.9s ease;
 }
+/* Borde ondulado de césped en la parte baja de la portada */
+.portada::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 38%;
+  background: #6bbf5b;
+  -webkit-mask: radial-gradient(22px 22px at 22px 0, transparent 96%, #000) repeat-x top / 44px 44px;
+          mask: radial-gradient(22px 22px at 22px 0, transparent 96%, #000) repeat-x top / 44px 44px;
+  z-index: 1;
+}
 
-/* Cielo pixelado con estrellas (las pinta el JS como cuadraditos) */
+/* Cielo pixelado: ahora son nubes cuadradas que pinta el JS */
 .cielo-pixel {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
 }
-.cielo-pixel .estrella {
+.cielo-pixel .estrella {   /* reutilizado como "pixel de nube" */
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #fff;
-  opacity: 0.85;
-  animation: parpadeo 3s steps(2) infinite;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  opacity: 0.9;
+  border-radius: 2px;
+  box-shadow: 10px 0 #fff, 20px 0 #fff, -10px 0 #fff, 0 10px #eef6ff, 10px 10px #eef6ff;
+  animation: nubePasa 26s linear infinite;
 }
-@keyframes parpadeo { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.25; } }
+@keyframes nubePasa {
+  from { transform: translateX(-12vw); }
+  to   { transform: translateX(112vw); }
+}
 
 /* Botón-flor central */
 .flor-inicio {
@@ -161,7 +193,51 @@ h1, h2, h3, .marca, .texto-click {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- Flores de fondo (parallax suave) ---------- */
+/* ---------- Cielo de isla: sol y nubes ---------- */
+.cielo-isla {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 60vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.sol {
+  position: absolute;
+  top: 24px;
+  right: 40px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff3b0 0%, #ffe066 60%, #ffd23f 100%);
+  box-shadow: 0 0 60px 20px rgba(255, 224, 102, 0.55);
+  animation: brilloSol 5s ease-in-out infinite;
+}
+@keyframes brilloSol { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+/* Nubes redondeadas que cruzan el cielo */
+.nube {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 40px;
+  opacity: 0.9;
+  filter: drop-shadow(0 6px 0 rgba(150,180,200,0.15));
+}
+.nube::before, .nube::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+.nube::before { width: 55px; height: 55px; top: -22px; left: 18px; }
+.nube::after  { width: 40px; height: 40px; top: -14px; left: 60px; }
+.nube.n1 { top: 8%;  left: -20%; transform: scale(1);   animation: cruzar 40s linear infinite; }
+.nube.n2 { top: 22%; left: -30%; transform: scale(0.7); animation: cruzar 55s linear infinite 6s; opacity: 0.75; }
+.nube.n3 { top: 15%; left: -25%; transform: scale(1.3); animation: cruzar 70s linear infinite 12s; opacity: 0.6; }
+@keyframes cruzar { to { left: 120%; } }
+
+/* ---------- Frutas/hojas de fondo (parallax suave) ---------- */
 .fondo-decorativo {
   position: fixed;
   inset: 0;
@@ -171,20 +247,21 @@ h1, h2, h3, .marca, .texto-click {
 .flor-fondo {
   position: absolute;
   font-size: 3rem;
-  opacity: 0.25;
+  opacity: 0.30;
   animation: flotar 8s ease-in-out infinite;
 }
-.flor-fondo.f1 { top: 12%; left: 6%;  animation-delay: 0s;   }
-.flor-fondo.f2 { top: 30%; right: 8%; animation-delay: 1.5s; font-size: 2.4rem; }
-.flor-fondo.f3 { top: 60%; left: 10%; animation-delay: 3s;   font-size: 3.4rem; }
+.flor-fondo.f1 { top: 34%; left: 6%;  animation-delay: 0s;   }
+.flor-fondo.f2 { top: 44%; right: 8%; animation-delay: 1.5s; font-size: 2.6rem; }
+.flor-fondo.f3 { top: 66%; left: 10%; animation-delay: 3s;   font-size: 3.2rem; }
 .flor-fondo.f4 { top: 78%; right: 12%; animation-delay: 2s;  }
-.flor-fondo.f5 { top: 45%; left: 48%; animation-delay: 4s;   opacity: 0.15; }
+.flor-fondo.f5 { top: 55%; left: 48%; animation-delay: 4s;   opacity: 0.18; }
+.flor-fondo.f6 { top: 86%; left: 30%; animation-delay: 2.6s; font-size: 2.2rem; }
 @keyframes flotar {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50%      { transform: translateY(-18px) rotate(8deg); }
 }
 
-/* ---------- Menú ---------- */
+/* ---------- Menú (barra de madera Nook) ---------- */
 .menu {
   position: sticky;
   top: 0;
@@ -194,16 +271,28 @@ h1, h2, h3, .marca, .texto-click {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 14px 22px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
-  box-shadow: var(--sombra);
+  padding: 12px 22px;
+  background: linear-gradient(180deg, var(--ac-madera) 0%, var(--ac-madera-osc) 100%);
+  border-bottom: 4px solid rgba(120, 78, 45, 0.6);
+  box-shadow: 0 4px 0 rgba(120, 78, 45, 0.25);
 }
 .marca {
-  font-size: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: var(--indigo);
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(120, 78, 45, 0.5);
   text-decoration: none;
+}
+/* Hojita AC del logo (SVG en fondo) */
+.hoja-marca {
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  background: no-repeat center / contain
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2C7 6 4 14 5 26c12 1 20-3 24-12C21 12 16 9 16 2Z' fill='%237bc86b' stroke='%234f9d5e' stroke-width='2'/%3E%3Cpath d='M9 24C13 16 19 11 26 9' stroke='%234f9d5e' stroke-width='2' fill='none'/%3E%3C/svg%3E");
 }
 .menu-links {
   display: flex;
@@ -213,40 +302,102 @@ h1, h2, h3, .marca, .texto-click {
 }
 .menu-links a {
   text-decoration: none;
-  color: var(--indigo-oscuro);
-  font-weight: 600;
-  padding: 6px 14px;
+  color: var(--ac-madera-osc);
+  font-weight: 700;
+  background: var(--ac-crema);
+  padding: 7px 14px;
   border-radius: 999px;
-  transition: background 0.25s ease, color 0.25s ease;
+  border: 2px solid rgba(120, 78, 45, 0.25);
+  box-shadow: 0 3px 0 rgba(120, 78, 45, 0.25);
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
 }
 .menu-links a:hover {
-  background: var(--morado);
-  color: var(--blanco);
+  background: var(--ac-baya);
+  color: #6b4a1e;
+  transform: translateY(-2px);
 }
 
-/* ---------- Hero / bienvenida ---------- */
+/* ---------- Hero: anuncio estilo Isabelle/Canela ---------- */
 .hero {
   position: relative;
   z-index: 1;
   display: flex;
-  justify-content: center;
-  padding: 70px 20px 40px;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 60px 20px 30px;
 }
-.hero-tarjeta { text-align: center; max-width: 620px; }
+.anuncio {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 680px;
+  text-align: left;
+  background: var(--ac-crema);
+  border: 3px solid #fff;
+  border-radius: 28px;
+  box-shadow: var(--sombra-ac), 0 0 0 4px rgba(201, 138, 94, 0.25);
+}
+.anuncio-personaje {
+  flex-shrink: 0;
+  font-size: 3rem;
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border-radius: 50%;
+  border: 3px solid var(--ac-hoja);
+  animation: saludo 3.5s ease-in-out infinite;
+}
+@keyframes saludo { 0%,90%,100% { transform: rotate(0); } 94% { transform: rotate(-10deg); } 97% { transform: rotate(10deg); } }
+.anuncio-etiqueta {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--ac-hoja-osc);
+  padding: 2px 12px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
 .hero h1 {
-  font-size: clamp(2rem, 6vw, 3.2rem);
-  color: var(--indigo);
-  margin-bottom: 10px;
+  font-size: clamp(1.7rem, 5vw, 2.8rem);
+  color: var(--ac-madera-osc);
+  margin-bottom: 6px;
 }
-.subtitulo { font-size: 1.15rem; color: var(--texto); }
+.subtitulo { font-size: 1.1rem; color: var(--texto); }
 
-/* ---------- Tarjetas genéricas (estilo cute) ---------- */
+/* Contador de días juntos (mostrador de Bayas) */
+.contador-bayas {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ac-madera-osc);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 3px solid #fff;
+  box-shadow: var(--sombra-ac);
+  font-weight: 700;
+}
+.baya {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe08a, var(--ac-baya) 70%);
+  border: 2px solid #b57e1e;
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15);
+}
+.contador-numero { font-family: 'Baloo 2', sans-serif; font-size: 1.5rem; }
+.contador-label { font-size: 0.9rem; opacity: 0.9; }
+
+/* ---------- Tarjetas genéricas (estilo cute AC) ---------- */
 .tarjeta {
-  background: var(--blanco);
+  background: var(--ac-crema);
   border-radius: var(--radio);
   padding: 26px 28px;
-  box-shadow: var(--sombra);
-  border: 2px solid var(--lila-fondo2);
+  box-shadow: var(--sombra-ac);
+  border: 3px solid #fff;
 }
 
 /* ---------- Secciones ---------- */
@@ -260,66 +411,87 @@ h1, h2, h3, .marca, .texto-click {
 .titulo-seccion {
   text-align: center;
   font-size: clamp(1.6rem, 4vw, 2.2rem);
-  color: var(--indigo);
+  color: var(--ac-madera-osc);
   margin-bottom: 8px;
 }
 .intro-seccion {
   text-align: center;
-  color: var(--morado);
+  color: var(--ac-hoja-osc);
   margin-bottom: 26px;
 }
 
-/* Separador de flores entre secciones (margaritas en CSS) */
+/* Separador de HOJAS entre secciones (guirnalda estilo AC) */
 .separador-flores {
-  height: 40px;
+  height: 34px;
   margin: 10px auto 26px;
   background-repeat: repeat-x;
   background-position: center;
-  background-size: 40px 40px;
-  opacity: 0.9;
-  /* margarita dibujada como SVG embebido (sin archivos externos) */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='%238e6fd4'%3E%3Cellipse cx='20' cy='9' rx='4' ry='7'/%3E%3Cellipse cx='20' cy='31' rx='4' ry='7'/%3E%3Cellipse cx='9' cy='20' rx='7' ry='4'/%3E%3Cellipse cx='31' cy='20' rx='7' ry='4'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='5' fill='%23ffd76b'/%3E%3C/svg%3E");
+  background-size: 34px 34px;
+  opacity: 0.95;
+  /* hojita AC dibujada como SVG embebido (sin archivos externos) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 32 32'%3E%3Cpath d='M16 3C8 7 5 14 6 25c11 1 18-3 21-11C20 12 16 9 16 3Z' fill='%237bc86b' stroke='%234f9d5e' stroke-width='2'/%3E%3Cpath d='M10 22C13 16 18 12 24 10' stroke='%234f9d5e' stroke-width='2' fill='none'/%3E%3C/svg%3E");
 }
 
-/* ---------- Carta / dedicatoria ---------- */
+/* ---------- Carta / dedicatoria (cuadro de diálogo AC) ---------- */
+.carta {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+}
+/* Piquito del bocadillo de diálogo */
+.carta::after {
+  content: "";
+  position: absolute;
+  left: 44px;
+  bottom: -16px;
+  border-width: 16px 16px 0 0;
+  border-style: solid;
+  border-color: var(--ac-crema) transparent transparent transparent;
+  filter: drop-shadow(0 6px 0 rgba(120, 92, 60, 0.12));
+}
 .carta p { margin-bottom: 14px; font-size: 1.08rem; }
 .carta .firma {
   text-align: right;
   font-family: 'Baloo 2', sans-serif;
   font-size: 1.2rem;
-  color: var(--morado);
+  color: var(--ac-hoja-osc);
 }
 
-/* ---------- Galería ---------- */
+/* ---------- Galería (fotos tipo polaroid de la isla) ---------- */
 .galeria-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 20px;
+  gap: 24px;
 }
 .foto {
-  background: var(--blanco);
-  border-radius: var(--radio);
+  background: #fff;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: var(--sombra);
-  border: 3px solid var(--morado-claro);
+  padding: 10px 10px 0;              /* marco polaroid */
+  box-shadow: var(--sombra-ac);
+  border: 1px solid rgba(120, 92, 60, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+/* Ligera inclinación alterna, como fotos pegadas */
+.foto:nth-child(odd)  { transform: rotate(-1.5deg); }
+.foto:nth-child(even) { transform: rotate(1.5deg); }
 .foto:hover {
-  transform: translateY(-6px) rotate(-1deg);
-  box-shadow: 0 14px 30px rgba(75, 63, 158, 0.28);
+  transform: translateY(-6px) rotate(0deg) scale(1.02);
+  box-shadow: 0 14px 24px rgba(120, 92, 60, 0.3);
 }
 .foto img {
   width: 100%;
   height: 220px;
   object-fit: cover;
   display: block;
-  background: var(--lila-fondo2);
+  border-radius: 8px;
+  background: var(--ac-arena);
 }
 .foto figcaption {
-  padding: 12px 14px;
+  padding: 12px 6px 14px;
   text-align: center;
-  font-weight: 600;
-  color: var(--indigo-oscuro);
+  font-weight: 700;
+  color: var(--ac-madera-osc);
 }
 
 /* ---------- Jardín (ilustraciones SVG) ---------- */
@@ -334,12 +506,22 @@ h1, h2, h3, .marca, .texto-click {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  background: var(--blanco);
+  background: var(--ac-crema);
   border-radius: var(--radio);
-  padding: 16px;
-  box-shadow: var(--sombra);
+  padding: 16px 16px 12px;
+  box-shadow: var(--sombra-ac);
+  border: 3px solid #fff;
   width: 100%;
   transition: transform 0.3s ease;
+}
+/* Macetita de tierra bajo cada flor (detalle AC) */
+.planta::after {
+  content: "";
+  width: 60%;
+  height: 10px;
+  border-radius: 0 0 10px 10px;
+  background: repeating-linear-gradient(90deg, #b98a5e 0 6px, #a9794f 6px 12px);
+  margin-top: 2px;
 }
 .planta:hover { transform: translateY(-6px); }
 .svg-planta {
@@ -355,14 +537,22 @@ h1, h2, h3, .marca, .texto-click {
   0%, 100% { transform: rotate(-3deg); }
   50%      { transform: rotate(3deg); }
 }
-.nombre-planta { font-weight: 600; color: var(--indigo); }
+.nombre-planta { font-weight: 700; color: var(--ac-hoja-osc); }
 
-/* ---------- Momentos (lista ampliable) ---------- */
-.momentos-lista {
+/* ---------- Momentos: tablón de corcho del pueblo ---------- */
+.tablon {
   display: flex;
   flex-direction: column;
   gap: 22px;
   position: relative;
+  padding: 26px 20px;
+  border-radius: 18px;
+  /* Textura de corcho */
+  background:
+    radial-gradient(rgba(150,100,50,0.18) 1px, transparent 1.5px) 0 0 / 10px 10px,
+    linear-gradient(135deg, #d9ab6e, #c9995a);
+  border: 10px solid var(--ac-madera-osc);
+  box-shadow: inset 0 0 30px rgba(120, 78, 45, 0.3), var(--sombra-ac);
 }
 .momento {
   display: flex;
@@ -374,23 +564,55 @@ h1, h2, h3, .marca, .texto-click {
   min-width: 72px;
   text-align: center;
   font-weight: 700;
-  color: var(--blanco);
-  background: var(--morado);
+  color: #6b4a1e;
+  background: var(--ac-baya);
   padding: 8px 6px;
-  border-radius: 14px;
-  box-shadow: var(--sombra);
+  border-radius: 12px;
+  border: 2px solid #fff;
+  box-shadow: var(--sombra-ac);
 }
-.momento-tarjeta { flex: 1; }
-.momento-tarjeta h3 { color: var(--indigo); margin-bottom: 6px; }
+.momento-tarjeta {
+  flex: 1;
+  position: relative;
+  background: #fffdf7;
+  border: 1px solid rgba(120, 92, 60, 0.15);
+}
+/* Chincheta clavada en cada nota del tablón */
+.momento-tarjeta::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff9aa2, #e5484d 70%);
+  box-shadow: 0 3px 4px rgba(0,0,0,0.3);
+}
+.momento-tarjeta h3 { color: var(--ac-madera-osc); margin-bottom: 6px; }
 
-/* ---------- Pie ---------- */
+/* ---------- Pie con franja de césped ---------- */
 .pie {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 30px 20px 40px;
-  color: var(--indigo-oscuro);
-  font-weight: 600;
+  padding: 60px 20px 30px;
+  margin-top: 20px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 2px 0 rgba(80, 120, 60, 0.5);
+  background: var(--ac-cesped2);
+}
+/* Borde ondulado de césped arriba del pie */
+.cesped-pie {
+  position: absolute;
+  top: -20px;
+  left: 0; right: 0;
+  height: 24px;
+  background: var(--ac-cesped2);
+  -webkit-mask: radial-gradient(14px 14px at 14px 0, transparent 96%, #000) repeat-x top / 28px 28px;
+          mask: radial-gradient(14px 14px at 14px 0, transparent 96%, #000) repeat-x top / 28px 28px;
 }
 
 
@@ -404,6 +626,9 @@ h1, h2, h3, .marca, .texto-click {
   .momento { flex-direction: column; }
   .momento-fecha { min-width: auto; align-self: flex-start; }
   .flor-fondo { font-size: 2.2rem; }
+  /* Anuncio en columna para que quepa bien en el móvil */
+  .anuncio { flex-direction: column; text-align: center; }
+  .sol { width: 64px; height: 64px; top: 14px; right: 18px; }
 }
 
 /* Respeta a quien prefiere menos animaciones */

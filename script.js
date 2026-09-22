@@ -13,8 +13,13 @@
    ------------------------------------------------------------ */
 const CONFIG = {
   numeroFlores: 34,      // cuántas flores crecen en la animación
-  numeroEstrellas: 70,   // estrellas pixeladas del cielo de la portada
+  numeroEstrellas: 16,   // nubes pixeladas del cielo de la portada
   duracionAnimacion: 2400, // ms antes de revelar la web
+
+  /* EDITABLE: fecha en la que empezasteis (AAAA, MM, DD).
+     OJO: el mes va de 0 a 11 -> enero = 0, junio = 5, etc.
+     Con esto se calcula el contador "días juntos" del inicio. */
+  fechaInicio: new Date(2025, 2, 22), // 22 de marzo de 2025 (cámbiala)
 
   /* Colores de los pétalos (los "tipos" de flor se mezclan con estos).
      Pensados como favoritos: morados, rosas, azul y verde sable (Star
@@ -141,18 +146,27 @@ const principal   = document.getElementById("principal");
 /* Dibuja la flor pixelada central (margarita en morado) */
 florInicio.innerHTML = crearFlorSVG(PLANTILLAS[0], "#b9a7ec");
 
-/* Pinta un cielo de estrellas pixeladas en la portada */
-(function pintarEstrellas() {
+/* Pinta nubes pixeladas que cruzan el cielo de la portada */
+(function pintarNubes() {
   for (let i = 0; i < CONFIG.numeroEstrellas; i++) {
-    const estrella = document.createElement("span");
-    estrella.className = "estrella";
-    estrella.style.left = Math.random() * 100 + "%";
-    estrella.style.top = Math.random() * 100 + "%";
-    estrella.style.animationDelay = (Math.random() * 3) + "s";
-    // Alguna estrella azulada (toque galaxia)
-    if (Math.random() < 0.2) estrella.style.background = "#8fd0ff";
-    cieloPixel.appendChild(estrella);
+    const nube = document.createElement("span");
+    nube.className = "estrella"; // reutiliza el estilo de "pixel de nube"
+    nube.style.left = Math.random() * 100 + "%";
+    nube.style.top = (Math.random() * 42) + "%"; // solo en la parte alta (cielo)
+    nube.style.animationDelay = (Math.random() * -26) + "s"; // arranque escalonado
+    if (Math.random() < 0.3) nube.style.transform = "scale(1.4)";
+    cieloPixel.appendChild(nube);
   }
+})();
+
+/* Calcula y muestra los días que lleváis juntos (contador de Bayas) */
+(function contarDias() {
+  const destino = document.getElementById("diasJuntos");
+  if (!destino) return;
+  const hoy = new Date();
+  const msPorDia = 1000 * 60 * 60 * 24;
+  const dias = Math.max(0, Math.floor((hoy - CONFIG.fechaInicio) / msPorDia));
+  destino.textContent = dias.toLocaleString("es-ES");
 })();
 
 /* ------------------------------------------------------------
