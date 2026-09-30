@@ -20,6 +20,12 @@
    ------------------------------------------------------------ */
 const LINEA_TIEMPO = [
   {
+    fecha: "23 abr 2026",
+    titulo: "Nuestra primera cita",
+    texto: "El punto de partida de todo.",
+    foto: "images/primera-cita.jpg"
+  },
+  {
     fecha: "13 abr 2026",
     titulo: "El día que empezó todo",
     texto: "Aquí empieza nuestra isla.",
