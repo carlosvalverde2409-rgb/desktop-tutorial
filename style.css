@@ -628,6 +628,105 @@ h1, h2, h3, .marca, .texto-click {
   box-shadow: inset 0 -6px 0 rgba(0,0,0,0.08);
 }
 
+/* ---------- Línea del tiempo: camino de arena de la isla ---------- */
+.linea-tiempo {
+  list-style: none;
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 6px 0 0;
+}
+/* El camino que baja por el centro */
+.linea-tiempo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 16px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background:
+    repeating-linear-gradient(180deg, rgba(160,120,70,0.25) 0 10px, transparent 10px 26px) center / 4px 100% no-repeat,
+    var(--ac-arena);
+  border: 3px solid #e6d2a8;
+}
+.hito {
+  position: relative;
+  width: 50%;
+  padding: 0 38px 36px 0;
+  /* Aparece al llegar con el scroll (lo activa script.js) */
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.hito.visible { opacity: 1; transform: none; }
+/* Uno a la izquierda, otro a la derecha */
+.hito:nth-child(even) {
+  margin-left: 50%;
+  padding: 0 0 36px 38px;
+}
+/* Punto sobre el camino */
+.hito::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ac-hoja);
+  border: 4px solid #fff;
+  box-shadow: 0 3px 0 rgba(120, 92, 60, 0.2);
+  z-index: 1;
+}
+.hito:nth-child(even)::before { right: auto; left: -12px; }
+/* Etiqueta de fecha (estilo baya) */
+.hito-fecha {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 3px 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #6b4a1e;
+  background: var(--ac-baya);
+  border: 2px solid #fff;
+  border-radius: 999px;
+  box-shadow: var(--sombra-ac);
+}
+.hito:nth-child(odd) { text-align: right; }
+.hito-tarjeta { text-align: left; padding: 16px 18px; }
+.hito-tarjeta h3 { color: var(--ac-madera-osc); font-size: 1.2rem; }
+.hito-tarjeta p { margin-top: 4px; }
+.hito-foto {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  background: var(--ac-arena);
+}
+/* Hito final "Hoy": punto rojo tipo chincheta */
+.hito-hoy::before { background: #e5484d; }
+.hito-hoy .hito-fecha { background: var(--ac-hoja-osc); color: #fff; }
+
+/* En móvil: camino a la izquierda y todos los hitos en una columna */
+@media (max-width: 700px) {
+  .linea-tiempo::before { left: 14px; transform: none; }
+  .hito,
+  .hito:nth-child(odd),
+  .hito:nth-child(even) {
+    width: 100%;
+    margin-left: 0;
+    padding: 0 0 30px 46px;
+    text-align: left;
+  }
+  .hito::before,
+  .hito:nth-child(even)::before { left: 13px; right: auto; }
+  .hito-foto { height: 260px; }
+}
+
 /* ---------- Próximo detalle ---------- */
 .proximo-tarjeta {
   max-width: 460px;

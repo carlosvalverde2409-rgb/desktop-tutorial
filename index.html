@@ -18,7 +18,7 @@
     href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Quicksand:wght@400;500;600&family=Press+Start+2P&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="stylesheet" href="style.css?v=9" />
 </head>
 
 <body>
@@ -78,6 +78,7 @@
       </a>
       <ul class="menu-links">
         <li><a href="#dedicatoria">💌 Carta</a></li>
+        <li><a href="#historia">👣 Historia</a></li>
         <li><a href="#galeria">📷 Fotos</a></li>
         <li><a href="#proximo">🎁 Próximo detalle</a></li>
         <li><a href="#momentos">📖 Momentos</a></li>
@@ -142,6 +143,21 @@
         </p>
         <p class="firma">Con cariño del chico que se muere de amor por ti ❤️</p>
       </div>
+    </section>
+
+
+    <!-- ================================================
+         SECCIÓN: LÍNEA DEL TIEMPO ("Nuestra historia")
+         Los hitos NO se escriben aquí: se añaden en datos.js
+         (lista LINEA_TIEMPO) y script.js los dibuja solo.
+         ================================================ -->
+    <section id="historia" class="seccion">
+      <div class="separador-flores" aria-hidden="true"></div>
+
+      <h2 class="titulo-seccion">Nuestra historia</h2>
+      <p class="intro-seccion">El camino de nuestra isla, paso a paso. 👣</p>
+
+      <ol id="lineaTiempo" class="linea-tiempo"></ol>
     </section>
 
 
@@ -291,6 +307,7 @@
   <!-- ============================================================
        LÓGICA (JavaScript vanilla)
        ============================================================ -->
-  <script src="script.js?v=8"></script>
+  <script src="datos.js?v=9"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>
