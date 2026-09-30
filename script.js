@@ -344,3 +344,78 @@ if (btnMusica) {
     btnMusica.setAttribute("aria-label", mudo ? "Activar música" : "Silenciar música");
   });
 }
+
+
+/* ============================================================
+   LÍNEA DEL TIEMPO
+   Lee la lista LINEA_TIEMPO de datos.js y crea un hito por cada
+   bloque. Al final añade solo un hito "Hoy" con los días juntos.
+   No hace falta tocar esto para añadir hitos: se hace en datos.js.
+   ============================================================ */
+(function pintarLineaTiempo() {
+  const lista = document.getElementById("lineaTiempo");
+  if (!lista || typeof LINEA_TIEMPO === "undefined") return;
+
+  // Crea un hito (<li>) con su etiqueta, tarjeta, texto y foto
+  function crearHito(hito, esHoy) {
+    const li = document.createElement("li");
+    li.className = "hito" + (esHoy ? " hito-hoy" : "");
+
+    const etiqueta = document.createElement("span");
+    etiqueta.className = "hito-fecha";
+    etiqueta.textContent = hito.fecha;
+    li.appendChild(etiqueta);
+
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "tarjeta hito-tarjeta";
+
+    if (hito.foto) {
+      const img = document.createElement("img");
+      img.src = hito.foto;
+      img.alt = hito.titulo || "";
+      img.loading = "lazy";
+      img.className = "hito-foto";
+      tarjeta.appendChild(img);
+    }
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = hito.titulo;
+    tarjeta.appendChild(titulo);
+
+    if (hito.texto) {
+      const p = document.createElement("p");
+      p.textContent = hito.texto;
+      tarjeta.appendChild(p);
+    }
+
+    li.appendChild(tarjeta);
+    return li;
+  }
+
+  LINEA_TIEMPO.forEach((hito) => lista.appendChild(crearHito(hito, false)));
+
+  // Hito final automático: siempre muestra los días de hoy
+  const dias = Math.max(0, Math.floor((new Date() - CONFIG.fechaInicio) / 86400000));
+  lista.appendChild(crearHito({
+    fecha: "📍 Hoy",
+    titulo: dias.toLocaleString("es-ES") + " días juntos",
+    texto: "Y el camino sigue...",
+    foto: ""
+  }, true));
+
+  // Los hitos aparecen suavemente al llegar a ellos con el scroll
+  const hitos = lista.querySelectorAll(".hito");
+  if (!("IntersectionObserver" in window)) {
+    hitos.forEach((h) => h.classList.add("visible"));
+    return;
+  }
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visible");
+        observador.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  hitos.forEach((h) => observador.observe(h));
+})();
